@@ -31,9 +31,8 @@ namespace ValidacionPorCookie.Controllers
         [Authorize]
         public IActionResult POST()
         {
-            String claims = "";
-
-            return Ok("Acceso Concedido");
+            var c = HttpContext.User.FindFirst("IdUAT");
+            return Ok("Acceso Concedido: " + c.Value.ToString());
         }
 
 
