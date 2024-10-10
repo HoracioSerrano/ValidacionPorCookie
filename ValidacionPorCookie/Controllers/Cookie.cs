@@ -17,7 +17,7 @@ namespace ValidacionPorCookie.Controllers
                 new ClaimsIdentity(
                     new Claim[] 
                     {
-                        new Claim(ClaimTypes.NameIdentifier,"30742267"),
+                        new Claim(ClaimTypes.NameIdentifier,"158354"),
                         new Claim("IdUAT","Esto seria el ID de mi UAT")
                     },
                     "EsquemaDefault"
