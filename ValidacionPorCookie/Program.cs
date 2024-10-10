@@ -17,7 +17,7 @@ builder.Services
         o.Cookie.HttpOnly = true;
         o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         o.Cookie.SameSite = SameSiteMode.Lax;
-        o.ExpireTimeSpan = TimeSpan.FromMinutes(15);
+        o.ExpireTimeSpan = TimeSpan.FromMinutes(10);
         o.SlidingExpiration = true;
     });
 builder.Services.AddAuthorization();

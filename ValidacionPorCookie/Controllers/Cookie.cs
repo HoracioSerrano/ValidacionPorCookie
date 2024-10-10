@@ -36,5 +36,15 @@ namespace ValidacionPorCookie.Controllers
             return Ok("Acceso Concedido");
         }
 
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DELETE()
+        {
+            await HttpContext.SignOutAsync("EsquemaDefault");
+
+            return Ok("Saliste");
+        }
+
     }
 }
