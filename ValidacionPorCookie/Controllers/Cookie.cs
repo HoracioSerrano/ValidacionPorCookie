@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ValidacionPorCookie.Controllers
 {
@@ -8,15 +11,28 @@ namespace ValidacionPorCookie.Controllers
     public class Cookie : Controller
     {
         [HttpGet]
-        public IActionResult GET()
+        public async Task<IActionResult> GET()
         {
+            await HttpContext.SignInAsync("EsquemaDefault",new ClaimsPrincipal(
+                new ClaimsIdentity(
+                    new Claim[] 
+                    {
+                        new Claim(ClaimTypes.NameIdentifier,"30742267"),
+                        new Claim("IdUAT","Esto seria el ID de mi UAT")
+                    },
+                    "EsquemaDefault"
+                )
+            ));
             return Ok("Cookie seteada");
         }
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult POST()
         {
+            String claims = "";
+
             return Ok("Acceso Concedido");
         }
 
