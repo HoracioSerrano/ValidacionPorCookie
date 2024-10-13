@@ -42,7 +42,21 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 
+
+app.Use(async (context, next) =>
+{
+    var c = context.User.FindFirst("usu_id");
+    if (c != null && c.Value == "123456789")
+    {
+        context.User.Identities.FirstOrDefault().AddClaim(new System.Security.Claims.Claim("NombreApellido", "Horacio"));
+    }
+    await next.Invoke();
+});
+
 app.UseAuthorization();
+
+
+
 
 app.MapControllers();
 

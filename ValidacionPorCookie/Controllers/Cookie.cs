@@ -17,7 +17,7 @@ namespace ValidacionPorCookie.Controllers
                 new ClaimsIdentity(
                     new Claim[] 
                     {
-                        new Claim(ClaimTypes.NameIdentifier,"158354"),
+                        new Claim("usu_id","123456789"),
                         new Claim("IdUAT","Esto seria el ID de mi UAT")
                     },
                     "EsquemaDefault"
@@ -32,7 +32,8 @@ namespace ValidacionPorCookie.Controllers
         public IActionResult POST()
         {
             var c = HttpContext.User.FindFirst("IdUAT");
-            return Ok("Acceso Concedido: " + c.Value.ToString());
+            var c2 = HttpContext.User.FindFirst("NombreApellido");
+            return Ok("Acceso Concedido: " + c.Value.ToString() + " Nombre añadido en middleware: " + c2.Value.ToString());
         }
 
 
