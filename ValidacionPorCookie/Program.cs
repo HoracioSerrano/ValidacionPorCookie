@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -48,7 +50,11 @@ app.Use(async (context, next) =>
     var c = context.User.FindFirst("usu_id");
     if (c != null && c.Value == "123456789")
     {
-        context.User.Identities.FirstOrDefault().AddClaim(new System.Security.Claims.Claim("NombreApellido", "Horacio"));
+        var identidad = context.User.Identities.FirstOrDefault();
+        if (identidad != null)
+        {
+            identidad.AddClaim(new Claim("NombreApellido", "Horacio"));
+        }
     }
     await next.Invoke();
 });
